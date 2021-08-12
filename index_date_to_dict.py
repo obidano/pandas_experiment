@@ -11,9 +11,18 @@ data=[
 
 df=pd.DataFrame(data)
 print(df)
+
+# GROUP BY DATE AND COUNT
 print('###################')
 group=df.groupby(by = ['date'])['pay'].count().to_frame(name='count').reset_index()
 print(group)
+
+# FORMAT DATE INDEX AND CONVERT TO DICT
 print('###################')
 group['date']= group['date'].dt.strftime('%Y/%m/%d')
 print(group.set_index('date').T.to_dict('list'))
+
+# RESULT
+"""
+{'2020/04/03': [2], '2020/04/04': [2], '2020/04/05': [1]}
+"""

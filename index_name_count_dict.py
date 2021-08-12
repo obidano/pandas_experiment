@@ -11,9 +11,15 @@ data=[
 
 df=pd.DataFrame(data)
 print(df)
+
+
+# GROUP BY NAME AND COUNT
 print('###################')
 group=df.groupby(by = ['name'])['pay'].count().to_frame(name='count').reset_index()
 print(group)
 
+# TRANSPOSE DATAFRAME AND CONVERT TO DICT
 print('###################')
 print(group.set_index('name').T.to_dict('list'))
+
+# RESULT
