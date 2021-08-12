@@ -23,6 +23,6 @@ print(group.set_index('name').T.to_dict('list'))
 
 # RESULT
 """
-
+{'daniel': [3500], 'paul': [2400]}
 
 """
