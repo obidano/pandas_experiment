@@ -11,37 +11,29 @@ data=[
 
 df=pd.DataFrame(data)
 print(df)
+
+# GET INDEX VALUES FOR MULTI INDEX DF
 types=df['type'].unique().tolist()
 print(types)
 
 print('###################')
-#group0=df.groupby(by =  ['date','type'], sort=False)['type'].count().to_frame(name='sum').reset_index()
-#print(group0)
-
-print('###################')
 group=df.groupby(by = ['date','type'], sort=False)['pay'].agg(['sum'])
-
-#group.set_index("date", drop=True, inplace=True)
 print(group)
 
 print('###################')
 idx = pd.MultiIndex.from_product([group.index.levels[0], types])
-#print(idx)
 linear_data=group.reindex(idx, fill_value=0)
-#linear_data.index.levels[0]= linear_data.index.levels[0].strftime('%Y/%m/%d')
 print(linear_data)
 print(type(linear_data))
+
+# Multi Level list comprehension
 print({level.strftime('%Y/%m/%d'): linear_data.xs(level).to_dict('index') for level in linear_data.index.levels[0]})
-sys.exit()
 
-print('###################')
-print(linear_data.index)
-reset_df=linear_data.reset_index(level=[0,1])
-print(reset_df)
-print(reset_df.index)
-#print(linear_data.reset_index(level=[1]).to_dict(orient='index'))
-#print(linear_data.to_dict(orient='index'))
-#sys.exit()
+# RESULT
+"""
+{
+ '2020/04/03': {'doc1': {'sum': 1000}, 'doc2': {'sum': 1300}, 'doc3': {'sum': 0}},
+ '2020/04/04': {'doc1': {'sum': 0}, 'doc2': {'sum': 2400}, 'doc3': {'sum': 0}}, 
+ '2020/04/05': {'doc1': {'sum': 0}, 'doc2': {'sum': 0}, 'doc3': {'sum': 1200}}}
 
-#print(reset_df.set_index('date').T.to_dict('dict'))
-#print(group.set_index('date').T.to_dict('list'))
+"""
