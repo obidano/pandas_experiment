@@ -30,9 +30,22 @@ print({level.strftime('%Y/%m/%d'): linear_data.xs(level).to_dict('index') for le
 
 # RESULT
 """
+INSPIRED BY
+https://stackoverflow.com/questions/47372181/pandas-groupby-how-to-show-zero-counts-in-dataframe
 {
  '2020/04/03': {'doc1': {'sum': 1000}, 'doc2': {'sum': 1300}, 'doc3': {'sum': 0}},
  '2020/04/04': {'doc1': {'sum': 0}, 'doc2': {'sum': 2400}, 'doc3': {'sum': 0}}, 
  '2020/04/05': {'doc1': {'sum': 0}, 'doc2': {'sum': 0}, 'doc3': {'sum': 1200}}}
+
+"""
+
+"""
+https://stackoverflow.com/questions/42150769/pandas-multi-index-dataframe-to-nested-dictionary
+
+MORE LEVELS, NOT TESTED
+
+
+{level0: {level1: df.xs([level0, level1]).to_dict('index') for level1 in df.index.levels[1]} for level0 in df.index.levels[0]}
+
 
 """
