@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime
-import sys
+
 data=[
     dict(name="daniel",type="doc1", pay=1000, date=datetime(2020, 4,3)),
     dict(name="paul",type="doc2", pay=1300, date=datetime(2020, 4,3)),
@@ -24,7 +24,6 @@ print('###################')
 idx = pd.MultiIndex.from_product([group.index.levels[0], types])
 linear_data=group.reindex(idx, fill_value=0)
 print(linear_data)
-print(type(linear_data))
 
 # Multi Level list comprehension
 print({level.strftime('%Y/%m/%d'): linear_data.xs(level).to_dict('index') for level in linear_data.index.levels[0]})
