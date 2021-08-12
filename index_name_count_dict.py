@@ -23,3 +23,7 @@ print('###################')
 print(group.set_index('name').T.to_dict('list'))
 
 # RESULT
+"""
+{'daniel': [3], 'paul': [2]}
+
+"""
