@@ -11,9 +11,18 @@ data=[
 
 df=pd.DataFrame(data)
 print(df)
+
+# GROUP BY NAME AND SUM
 print('###################')
 group=df.groupby(by = ['name'])['pay'].sum().to_frame(name='sum').reset_index()
 print(group)
-#sys.exit()
+
+# TRANSPOSE DATAFRAME AND CONVERT TO DICT
 print('###################')
 print(group.set_index('name').T.to_dict('list'))
+
+# RESULT
+"""
+
+
+"""
